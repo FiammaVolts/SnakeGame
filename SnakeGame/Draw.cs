@@ -26,6 +26,22 @@ namespace SnakeGame
             ReadEntry();
         }
 
+        public void ShowCredits() {
+            Console.WriteLine("╔═══*.·:·.**  < Credits >  **.·:·.*═══╗");
+            Console.WriteLine();
+            Console.WriteLine("       Ines Goncalves    a21702076\n" +
+                              "       Ines Nunes        a21702520\n" +
+                              "       Sara Gama         a21705494\n");
+            Console.WriteLine("╚═══*.·:·.**  < Credits >  **.·:·.*═══╝");
+
+            Console.WriteLine();
+            Console.WriteLine("<- Press any button to go back to the menu\n");
+            Console.ReadKey();
+            // Will call the ReadEntry() method
+            ShowMenu();
+        }
+
+
         public void ShowWorld() {
             for (int i = 0; i < World.height; i++) {
                 for (int j = 0; j < World.width; j++) {
