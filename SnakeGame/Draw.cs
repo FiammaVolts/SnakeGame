@@ -8,14 +8,18 @@ namespace SnakeGame
 {
     class Draw
     {
+        public World world;
+
+        private readonly string snake = "\u20E2";
+        private readonly string apple = "\u20D8";
 
         public void ShowMenu() {
             Console.WriteLine("╔═══*.·:·.**  < Snake >  **.·:·.*═══╗");
             Console.WriteLine();
             Console.WriteLine("       1. Start Game\n" +
                               "       2. Highscore\n" +
-                              "       3. Credits\n" + 
-                              "       4. Quit Game\n)";
+                              "       3. Credits\n" +
+                              "       4. Quit Game\n");
             Console.WriteLine("╚═══*.·:·.**  < Game >  **.·:·.*═══╝");
 
             // Will call the ReadEntry() method
