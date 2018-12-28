@@ -46,22 +46,22 @@ namespace SnakeGame
                 }
 
 
-                if (pressedKey.Key == ConsoleKey.A)
+                if (pressedKey.Key == ConsoleKey.LeftArrow)
                 {
                     pre_dir = dir;
                     dir = "LEFT";
                 }
-                else if (pressedKey.Key == ConsoleKey.D)
+                else if (pressedKey.Key == ConsoleKey.RightArrow)
                 {
                     pre_dir = dir;
                     dir = "RIGHT";
                 }
-                else if (pressedKey.Key == ConsoleKey.W)
+                else if (pressedKey.Key == ConsoleKey.UpArrow)
                 {
                     pre_dir = dir;
                     dir = "UP";
                 }
-                else if (pressedKey.Key == ConsoleKey.S)
+                else if (pressedKey.Key == ConsoleKey.DownArrow)
                 {
                     pre_dir = dir;
                     dir = "DOWN";
@@ -78,23 +78,46 @@ namespace SnakeGame
             {
                 case "RIGHT":
                     im.NoseX++;
-                    horizontal = true;
+                    //horizontal = true;
                     break;
 
                 case "LEFT":
                     im.NoseX--;
-                    horizontal = true;
+                    //horizontal = true;
                     break;
 
                 case "UP":
                     im.NoseY--;
-                    vertical = true;
+                    //vertical = true;
                     break;
 
                 case "DOWN":
                     im.NoseY++;
-                    vertical = true;
+                    //vertical = true;
                     break;
+            }
+
+            if ((dir == "LEFT") || (dir == "RIGHT")) {
+                horizontal = true;
+            }
+
+            else {
+                horizontal = false;
+            }
+
+            if ((dir == "UP") || (dir == "DOWN")) {
+                vertical = true;
+            }
+
+            else {
+                vertical = false;
+            }
+
+            if (im.NoseX == im.AppleX && im.NoseY == im.AppleY) {
+                Points += 10;
+                im.NTail++;
+                im.AppleX = rnd.Next(1, im.width - 1);
+                im.AppleY = rnd.Next(1, im.height - 1);
             }
 
             if (im.NoseX <= 0 || im.NoseX >= im.width - 1 ||
@@ -106,14 +129,6 @@ namespace SnakeGame
             else
             {
                 gm.gameOver = false;
-            }
-
-            if (im.NoseX == im.AppleX && im.NoseY == im.AppleY)
-            {
-                Points += 10;
-                im.NTail++;
-                im.AppleX = rnd.Next(1, im.width - 1);
-                im.AppleY = rnd.Next(1, im.height - 1);
             }
 
             for (int i = 1; i < im.NTail; i++)

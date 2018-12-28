@@ -64,6 +64,8 @@ namespace SnakeGame
 
         public void ShowWorld()
         {
+            Console.SetCursorPosition(0, 0);
+
             for (int i = 0; i < height; i++)
             {
                 for (int j = 0; j < width; j++)
@@ -78,11 +80,11 @@ namespace SnakeGame
                     }
                     else if (j == AppleX && i == AppleY)
                     {
-                        Console.Write(apple);
+                        Console.Write("a");
                     }
                     else if (j == NoseX && i == NoseY)
                     {
-                        Console.Write(snake);
+                        Console.Write("O");
                     }
                     else
                     {
@@ -91,7 +93,7 @@ namespace SnakeGame
                         {
                             if (TailX[k] == j && TailY[k] == i)
                             {
-                                Console.Write(snake);
+                                Console.Write("O");
                                 isPrinted = true;
                             }
                         }
