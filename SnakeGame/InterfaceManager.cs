@@ -7,16 +7,15 @@ using System.Threading.Tasks;
 namespace SnakeGame
 {
     class InterfaceManager
-    {
-        //Mudar para propriedades
-        public int noseX { get; set; }
-        public int noseY { get; set; }
-        public int nTail { get; set; }
-        public int appleX { get; set; }
-        public int appleY { get; set; }
+    {        
+        public int NoseX { get; set; }
+        public int NoseY { get; set; }
+        public int NTail { get; set; }
+        public int AppleX { get; set; }
+        public int AppleY { get; set; }
 
-        public const int height = 20;
-        public const int width = 60;
+        public readonly int height = 20;
+        public readonly int width = 60;
 
         public bool isPrinted { get; set; }
 
@@ -26,6 +25,10 @@ namespace SnakeGame
         private readonly string snake = "\u20E2";
         private readonly string apple = "\u20D8";
 
+        public void Update()
+        {
+            ShowMenu();
+        }
 
 
         public void ShowMenu()
@@ -73,18 +76,18 @@ namespace SnakeGame
                     {
                         Console.Write("|");
                     }
-                    else if (j == appleX && i == appleY)
+                    else if (j == AppleX && i == AppleY)
                     {
                         Console.Write(apple);
                     }
-                    else if (j == noseX && i == noseY)
+                    else if (j == NoseX && i == NoseY)
                     {
                         Console.Write(snake);
                     }
                     else
                     {
                         isPrinted = false;
-                        for (int k = 0; k < nTail; k++)
+                        for (int k = 0; k < NTail; k++)
                         {
                             if (TailX[k] == j && TailY[k] == i)
                             {
@@ -98,8 +101,8 @@ namespace SnakeGame
 
                 }
                 Console.WriteLine();
-                Console.WriteLine($"Your score: {snake.points}");
             }
+            Console.WriteLine($"Your score: {Snake.Points}");
         }
 
         public int ReadEntry()
