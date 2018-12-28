@@ -8,8 +8,8 @@ namespace SnakeGame
 {
     class GameManager
     {
-        private InterfaceManager im { get; }
-
+        private InterfaceManager im;
+        private Random rnd;
         
         public bool gameOver;
 
@@ -30,9 +30,11 @@ namespace SnakeGame
             im.appleY = rnd.Next(1, InterfaceManager.height - 1);
         }
 
-        public void Update()
+        public void GameLoop()
         {
             InterfaceManager im = new InterfaceManager();
+
+            Start();
 
             do
             {
