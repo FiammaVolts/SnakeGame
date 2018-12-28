@@ -14,15 +14,11 @@ namespace SnakeGame
         public int nTail { get; set; }
         public int appleX { get; set; }
         public int appleY { get; set; }
-        public int points { get; set; }
 
         public const int height = 20;
         public const int width = 60;
 
         public bool isPrinted { get; set; }
-
-        public string dir { get; set; }
-        public string pre_dir { get; set; }
 
         private int[] TailX = new int[100];
         private int[] TailY = new int[100];
@@ -102,8 +98,10 @@ namespace SnakeGame
 
                 }
                 Console.WriteLine();
+                Console.WriteLine($"Your score: {snake.points}");
             }
         }
+
         public int ReadEntry()
         {
             // A loop that will run while the condition is true, and while the
