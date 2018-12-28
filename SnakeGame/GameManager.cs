@@ -39,8 +39,8 @@ namespace SnakeGame
         public void GameLoop()
         {
             Start();
-
-            do
+            
+            while(true)
             {
                 if (!gameOver)
                 {
@@ -51,7 +51,6 @@ namespace SnakeGame
                 else
                     snake.Lose();
             }
-            while (gameOver == false);
         }
     }
 }
