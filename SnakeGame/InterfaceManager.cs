@@ -8,6 +8,7 @@ namespace SnakeGame
 {
     class InterfaceManager
     {
+        //Mudar para propriedades
         public int noseX;
         public int noseY;
         public int nTail;
