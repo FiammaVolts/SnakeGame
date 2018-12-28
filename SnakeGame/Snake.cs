@@ -4,10 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SnakeGame
-{
-    class Snake
-    {
+namespace SnakeGame {
+    class Snake {
         private int[] TailX = new int[100];
         private int[] TailY = new int[100];
 
@@ -19,33 +17,67 @@ namespace SnakeGame
         private bool horizontal;
         private bool vertical;
 
-        public Snake()
-        {
+        public string dir;
+        public string pre_dir;
+
+        public int points { get; set; }
+
+        public Snake() {
             rnd = new Random();
         }
 
-        public void Update()
-        {
-           
+        public void Update() {
+            CheckInput();
+            Movement();
         }
 
-        void Movement() {
+        public void CheckInput() {
+            while (Console.KeyAvailable) {
+                pressedKey = Console.ReadKey(true);
+                if (pressedKey.Key == ConsoleKey.Escape) {
+                    Environment.Exit(0);
+                }
+
+
+                if (pressedKey.Key == ConsoleKey.A) {
+                    pre_dir = dir;
+                    dir = "LEFT";
+                }
+                else if (pressedKey.Key == ConsoleKey.D) {
+                    pre_dir = dir;
+                    dir = "RIGHT";
+                }
+                else if (pressedKey.Key == ConsoleKey.W) {
+                    pre_dir = dir;
+                    dir = "UP";
+                }
+                else if (pressedKey.Key == ConsoleKey.S) {
+                    pre_dir = dir;
+                    dir = "DOWN";
+                }
+            }
+        }
+
+        public void Movement() {
             int preX = TailX[0];
             int preY = TailY[0];
 
-            switch (im.dir) {
+            switch (dir) {
                 case "RIGHT":
                     im.noseX++;
                     horizontal = true;
                     break;
+
                 case "LEFT":
                     im.noseX--;
                     horizontal = true;
                     break;
+
                 case "UP":
                     im.noseY--;
                     vertical = true;
                     break;
+
                 case "DOWN":
                     im.noseY++;
                     vertical = true;
@@ -56,12 +88,13 @@ namespace SnakeGame
                 im.noseY <= 0 || im.noseY >= InterfaceManager.height - 1) {
                 gm.gameOver = true;
             }
+
             else {
                 gm.gameOver = false;
             }
 
             if (im.noseX == im.appleX && im.noseY == im.appleY) {
-                im.points += 10;
+                points += 10;
                 im.nTail++;
                 im.appleX = rnd.Next(1, InterfaceManager.width - 1);
                 im.appleY = rnd.Next(1, InterfaceManager.height - 1);
@@ -76,6 +109,7 @@ namespace SnakeGame
                         gm.gameOver = true;
                     }
                 }
+
                 if (TailX[i] == im.appleX && TailY[i] == im.appleY) {
                     im.appleX = rnd.Next(1, InterfaceManager.width - 1);
                     im.appleY = rnd.Next(1, InterfaceManager.height - 1);
