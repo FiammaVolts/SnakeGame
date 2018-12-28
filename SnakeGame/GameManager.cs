@@ -10,17 +10,8 @@ namespace SnakeGame
     {
         private InterfaceManager im { get; }
 
-        private Random rnd;
-        private ConsoleKeyInfo pressedKey;
         
-        private bool gameOver;
-        private bool reset;
-
-        public GameManager()
-        {
-            rnd = new Random();
-            pressedKey = new ConsoleKeyInfo();
-        }
+        public bool gameOver;
 
         public void Start()
         {
@@ -31,7 +22,6 @@ namespace SnakeGame
             im.nTail = 0;
 
             gameOver = false;
-            reset = false;
             im.isPrinted = false;
 
             im.noseX = InterfaceManager.width / 2;
