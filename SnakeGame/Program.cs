@@ -13,7 +13,7 @@ namespace SnakeGame
             GameManager gm = new GameManager();
 
             //gm.Start();
-            gm.Update();
+            gm.GameLoop();
             
             
         }
