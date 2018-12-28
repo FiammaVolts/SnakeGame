@@ -10,42 +10,48 @@ namespace SnakeGame
     {
         private InterfaceManager im;
         private Random rnd;
-        
+        private Snake snake;
+
+
         public bool gameOver;
 
 
-        public void Start() {
-
-            Console.WriteLine("Entrou no start");
-
-            Snake snake = new Snake();
+        public void Start()
+        {
+            snake = new Snake();
+            im = new InterfaceManager();
+            rnd = new Random();
 
             snake.dir = "RIGHT";
             snake.pre_dir = "";
-            snake.points = 0;
-            im.nTail = 0;
+            Snake.Points = 0;
+            im.NTail = 0;
 
             gameOver = false;
             im.isPrinted = false;
 
-            im.noseX = InterfaceManager.width / 2;
-            im.noseY = InterfaceManager.height / 2;
-            im.appleX = rnd.Next(1, InterfaceManager.width - 1);
-            im.appleY = rnd.Next(1, InterfaceManager.height - 1);
+            im.NoseX = im.width / 2;
+            im.NoseY = im.height / 2;
+            im.AppleX = rnd.Next(1, im.width - 1);
+            im.AppleY = rnd.Next(1, im.height - 1);
         }
 
         public void GameLoop()
         {
-            InterfaceManager im = new InterfaceManager();
-
             Start();
 
             do
             {
-                Console.Clear();
-                im.ShowMenu();
+                if (!gameOver)
+                {
+                    Console.Clear();
+                    im.Update();
+                    snake.Update();
+                }
+                else
+                    snake.Lose();
             }
-            while (gameOver == false);            
-        }      
+            while (gameOver == false);
+        }
     }
 }
