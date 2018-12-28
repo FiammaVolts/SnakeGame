@@ -13,12 +13,16 @@ namespace SnakeGame
         
         public bool gameOver;
 
-        public void Start()
-        {
 
-            im.dir = "RIGHT";
-            im.pre_dir = "";
-            im.points = 0;
+        public void Start() {
+
+            Console.WriteLine("Entrou no start");
+
+            Snake snake = new Snake();
+
+            snake.dir = "RIGHT";
+            snake.pre_dir = "";
+            snake.points = 0;
             im.nTail = 0;
 
             gameOver = false;
