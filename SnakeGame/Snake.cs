@@ -13,73 +13,72 @@ namespace SnakeGame
 
         private Random rnd;
         private ConsoleKeyInfo pressedKey;
+        private InterfaceManager im;
+        private GameManager gm;
 
         private bool horizontal;
         private bool vertical;
 
+        public Snake()
+        {
+            rnd = new Random();
+        }
+
+        public void Update()
+        {
+           
+        }
+
         void Movement() {
             int preX = TailX[0];
             int preY = TailY[0];
-            int tempX, tempY;
 
-            if (dir != "STOP") {
-                TailX[0] = noseX;
-                TailY[0] = noseY;
-                for (int i = 1; i < nTail; i++) {
-                    tempX = TailX[i];
-                    tempY = TailY[i];
-                    TailX[i] = preX;
-                    TailY[i] = preY;
-                    preX = tempX;
-                    preY = tempY;
-                }
-            }
-
-            switch (dir) {
+            switch (im.dir) {
                 case "RIGHT":
-                    noseX++;
+                    im.noseX++;
                     horizontal = true;
                     break;
                 case "LEFT":
-                    noseX--;
+                    im.noseX--;
                     horizontal = true;
                     break;
                 case "UP":
-                    noseY--;
+                    im.noseY--;
                     vertical = true;
                     break;
                 case "DOWN":
-                    noseY++;
+                    im.noseY++;
                     vertical = true;
                     break;
             }
 
-            if (noseX <= 0 || noseX >= width - 1 || noseY <= 0 || noseY >= height - 1) {
-                gameOver = true;
+            if (im.noseX <= 0 || im.noseX >= InterfaceManager.width - 1 ||
+                im.noseY <= 0 || im.noseY >= InterfaceManager.height - 1) {
+                gm.gameOver = true;
             }
             else {
-                gameOver = false;
+                gm.gameOver = false;
             }
 
-            if (noseX == appleX && noseY == appleY) {
-                score += 10;
-                nTail++;
-                appleX = rnd.Next(1, InterfaceManager.width - 1);
-                appleY = rnd.Next(1, InterfaceManager.height - 1);
+            if (im.noseX == im.appleX && im.noseY == im.appleY) {
+                im.points += 10;
+                im.nTail++;
+                im.appleX = rnd.Next(1, InterfaceManager.width - 1);
+                im.appleY = rnd.Next(1, InterfaceManager.height - 1);
             }
 
-            for (int i = 1; i < nTail; i++) {
-                if (TailX[i] == noseX && TailY[i] == noseY) {
+            for (int i = 1; i < im.nTail; i++) {
+                if (TailX[i] == im.noseX && TailY[i] == im.noseY) {
                     if (horizontal || vertical) {
-                        gameOver = false;
+                        gm.gameOver = false;
                     }
                     else {
-                        gameOver = true;
+                        gm.gameOver = true;
                     }
                 }
-                if (TailX[i] == appleX && TailY[i] == appleY) {
-                    appleX = rnd.Next(1, InterfaceManager.width - 1);
-                    appleY = rnd.Next(1, InterfaceManager.height - 1);
+                if (TailX[i] == im.appleX && TailY[i] == im.appleY) {
+                    im.appleX = rnd.Next(1, InterfaceManager.width - 1);
+                    im.appleY = rnd.Next(1, InterfaceManager.height - 1);
                 }
             }
         }
