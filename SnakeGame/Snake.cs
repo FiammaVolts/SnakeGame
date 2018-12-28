@@ -4,8 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SnakeGame {
-    class Snake {
+namespace SnakeGame
+{
+    class Snake
+    {
         private int[] TailX = new int[100];
         private int[] TailY = new int[100];
 
@@ -20,99 +22,132 @@ namespace SnakeGame {
         public string dir;
         public string pre_dir;
 
-        public int points { get; set; }
+        public static int Points { get; set; }
 
-        public Snake() {
+        public Snake()
+        {
             rnd = new Random();
         }
 
-        public void Update() {
+        public void Update()
+        {
             CheckInput();
             Movement();
         }
 
-        public void CheckInput() {
-            while (Console.KeyAvailable) {
+        public void CheckInput()
+        {
+            while (Console.KeyAvailable)
+            {
                 pressedKey = Console.ReadKey(true);
-                if (pressedKey.Key == ConsoleKey.Escape) {
+                if (pressedKey.Key == ConsoleKey.Escape)
+                {
                     Environment.Exit(0);
                 }
 
 
-                if (pressedKey.Key == ConsoleKey.A) {
+                if (pressedKey.Key == ConsoleKey.A)
+                {
                     pre_dir = dir;
                     dir = "LEFT";
                 }
-                else if (pressedKey.Key == ConsoleKey.D) {
+                else if (pressedKey.Key == ConsoleKey.D)
+                {
                     pre_dir = dir;
                     dir = "RIGHT";
                 }
-                else if (pressedKey.Key == ConsoleKey.W) {
+                else if (pressedKey.Key == ConsoleKey.W)
+                {
                     pre_dir = dir;
                     dir = "UP";
                 }
-                else if (pressedKey.Key == ConsoleKey.S) {
+                else if (pressedKey.Key == ConsoleKey.S)
+                {
                     pre_dir = dir;
                     dir = "DOWN";
                 }
             }
         }
 
-        public void Movement() {
+        public void Movement()
+        {
             int preX = TailX[0];
             int preY = TailY[0];
 
-            switch (dir) {
+            switch (dir)
+            {
                 case "RIGHT":
-                    im.noseX++;
+                    im.NoseX++;
                     horizontal = true;
                     break;
 
                 case "LEFT":
-                    im.noseX--;
+                    im.NoseX--;
                     horizontal = true;
                     break;
 
                 case "UP":
-                    im.noseY--;
+                    im.NoseY--;
                     vertical = true;
                     break;
 
                 case "DOWN":
-                    im.noseY++;
+                    im.NoseY++;
                     vertical = true;
                     break;
             }
 
-            if (im.noseX <= 0 || im.noseX >= InterfaceManager.width - 1 ||
-                im.noseY <= 0 || im.noseY >= InterfaceManager.height - 1) {
+            if (im.NoseX <= 0 || im.NoseX >= im.width - 1 ||
+                im.NoseY <= 0 || im.NoseY >= im.height - 1)
+            {
                 gm.gameOver = true;
             }
 
-            else {
+            else
+            {
                 gm.gameOver = false;
             }
 
-            if (im.noseX == im.appleX && im.noseY == im.appleY) {
-                points += 10;
-                im.nTail++;
-                im.appleX = rnd.Next(1, InterfaceManager.width - 1);
-                im.appleY = rnd.Next(1, InterfaceManager.height - 1);
+            if (im.NoseX == im.AppleX && im.NoseY == im.AppleY)
+            {
+                Points += 10;
+                im.NTail++;
+                im.AppleX = rnd.Next(1, im.width - 1);
+                im.AppleY = rnd.Next(1, im.height - 1);
             }
 
-            for (int i = 1; i < im.nTail; i++) {
-                if (TailX[i] == im.noseX && TailY[i] == im.noseY) {
-                    if (horizontal || vertical) {
+            for (int i = 1; i < im.NTail; i++)
+            {
+                if (TailX[i] == im.NoseX && TailY[i] == im.NoseY)
+                {
+                    if (horizontal || vertical)
+                    {
                         gm.gameOver = false;
                     }
-                    else {
+                    else
+                    {
                         gm.gameOver = true;
                     }
                 }
 
-                if (TailX[i] == im.appleX && TailY[i] == im.appleY) {
-                    im.appleX = rnd.Next(1, InterfaceManager.width - 1);
-                    im.appleY = rnd.Next(1, InterfaceManager.height - 1);
+                if (TailX[i] == im.AppleX && TailY[i] == im.AppleY)
+                {
+                    im.AppleX = rnd.Next(1, im.width - 1);
+                    im.AppleY = rnd.Next(1, im.height - 1);
+                }
+            }
+        }
+
+        public void Lose()
+        {            
+            Console.WriteLine("You did an opsie :(\n");
+            Console.Write("Press ESC to exit to menu\n");
+            while (true)
+            {
+                pressedKey = Console.ReadKey(true);
+                if (pressedKey.Key == ConsoleKey.Escape)
+                {
+                    im.ShowMenu();
                 }
             }
         }
