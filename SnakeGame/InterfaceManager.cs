@@ -9,20 +9,20 @@ namespace SnakeGame
     class InterfaceManager
     {
         //Mudar para propriedades
-        public int noseX;
-        public int noseY;
-        public int nTail;
-        public int appleX;
-        public int appleY;
-        public int points;
+        public int noseX { get; set; }
+        public int noseY { get; set; }
+        public int nTail { get; set; }
+        public int appleX { get; set; }
+        public int appleY { get; set; }
+        public int points { get; set; }
 
         public const int height = 20;
         public const int width = 60;
 
-        public bool isPrinted;
+        public bool isPrinted { get; set; }
 
-        public string dir;
-        public string pre_dir;
+        public string dir { get; set; }
+        public string pre_dir { get; set; }
 
         private int[] TailX = new int[100];
         private int[] TailY = new int[100];
