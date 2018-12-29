@@ -5,12 +5,16 @@ namespace SnakeGame
 {
     class GameManager
     {
+        // Instance of InterfaceManager
         private InterfaceManager im;
+        // Instance of Random
         private Random rnd;
+        // Instance of Snake
         private Snake snake;
 
         public int points;
         
+        // Start() method that will start all our variables
         public void Start()
         {            
             im = new InterfaceManager(this);
@@ -29,18 +33,21 @@ namespace SnakeGame
             im.AppleY = rnd.Next(1, im.height - 1);
         }
 
+        // GameLoop() method that will manage our game
         public void GameLoop()
         {
             Start();
             Console.CursorVisible = false;
             
+            // Will run as long as GameOver is not true
             while(!snake.GameOver)
             {
                 points = snake.Points;
                 im.Update();
                 snake.Update();
-                Thread.Sleep(30);
+                Thread.Sleep(40);
             }
+            // Will call the Lose() method
             snake.Lose();
             Console.Clear();
             GameLoop();
