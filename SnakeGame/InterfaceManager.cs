@@ -20,8 +20,8 @@ namespace SnakeGame
 
         private GameManager gm;
 
-        private readonly string snake = "\u20E2";
-        private readonly string apple = "\u20D8";
+        private readonly string _snake = "\u20E2";
+        private readonly string _apple = "\u20D8";
 
         public InterfaceManager(GameManager gm)
         {
@@ -108,7 +108,7 @@ namespace SnakeGame
                 }
                 Console.WriteLine();
             }
-            Console.WriteLine($"Your score: {Snake.Points}");
+            Console.WriteLine($"Your score: {gm.points}");
         }
 
         public void ReadEntry()
