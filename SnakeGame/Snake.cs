@@ -16,7 +16,7 @@ namespace SnakeGame
         public string dir;
         public string pre_dir;
 
-        public static int Points { get; set; }
+        public int Points { get; set; } = 0;
 
         public Snake(InterfaceManager im)
         {
