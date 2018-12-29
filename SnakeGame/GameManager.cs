@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 
 namespace SnakeGame
 {
@@ -10,24 +7,19 @@ namespace SnakeGame
     {
         private InterfaceManager im;
         private Random rnd;
-        private Snake snake;
-
-
-        public bool gameOver;
-
-
+        private Snake snake;       
+        
         public void Start()
-        {
-            snake = new Snake();
-            im = new InterfaceManager();
+        {            
+            im = new InterfaceManager(this);
+            snake = new Snake(im);
             rnd = new Random();
 
             snake.dir = "RIGHT";
             snake.pre_dir = "";
             Snake.Points = 0;
             im.NTail = 0;
-
-            gameOver = false;
+            
             im.isPrinted = false;
 
             im.NoseX = im.width / 2;
@@ -39,18 +31,17 @@ namespace SnakeGame
         public void GameLoop()
         {
             Start();
+            Console.CursorVisible = false;
             
-            while(true)
+            while(!snake.GameOver)
             {
-                if (!gameOver)
-                {
-                    Console.Clear();
-                    im.Update();
-                    snake.Update();
-                }
-                else
-                    snake.Lose();
+                im.Update();
+                snake.Update();
+                Thread.Sleep(30);
             }
+            snake.Lose();
+            Console.Clear();
+            GameLoop();
         }
     }
 }
