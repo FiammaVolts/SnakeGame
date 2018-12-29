@@ -1,31 +1,26 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SnakeGame
 {
     class Snake
     {
-        private int[] TailX = new int[100];
-        private int[] TailY = new int[100];
-
         private Random rnd;
         private ConsoleKeyInfo pressedKey;
         private InterfaceManager im;
-        private GameManager gm;
 
         private bool horizontal;
         private bool vertical;
+
+        public bool GameOver { get; set; }
 
         public string dir;
         public string pre_dir;
 
         public static int Points { get; set; }
 
-        public Snake()
+        public Snake(InterfaceManager im)
         {
+            this.im = im;
             rnd = new Random();
         }
 
@@ -71,49 +66,63 @@ namespace SnakeGame
 
         public void Movement()
         {
-            int preX = TailX[0];
-            int preY = TailY[0];
+            int preX = im.TailX[0];
+            int preY = im.TailY[0];
+            int tempX, tempY;
+
+            im.TailX[0] = im.NoseX;
+            im.TailY[0] = im.NoseY;
+            for (int i = 1; i < im.NTail; i++)
+            {
+                tempX = im.TailX[i];
+                tempY = im.TailY[i];
+                im.TailX[i] = preX;
+                im.TailY[i] = preY;
+                preX = tempX;
+                preY = tempY;
+            }
 
             switch (dir)
             {
                 case "RIGHT":
                     im.NoseX++;
-                    //horizontal = true;
                     break;
 
                 case "LEFT":
                     im.NoseX--;
-                    //horizontal = true;
                     break;
 
                 case "UP":
                     im.NoseY--;
-                    //vertical = true;
                     break;
 
                 case "DOWN":
                     im.NoseY++;
-                    //vertical = true;
                     break;
             }
 
-            if ((dir == "LEFT") || (dir == "RIGHT")) {
+            if ((dir == "LEFT") || (dir == "RIGHT"))
+            {
                 horizontal = true;
             }
 
-            else {
+            else
+            {
                 horizontal = false;
             }
 
-            if ((dir == "UP") || (dir == "DOWN")) {
+            if ((dir == "UP") || (dir == "DOWN"))
+            {
                 vertical = true;
             }
 
-            else {
+            else
+            {
                 vertical = false;
             }
 
-            if (im.NoseX == im.AppleX && im.NoseY == im.AppleY) {
+            if (im.NoseX == im.AppleX && im.NoseY == im.AppleY)
+            {
                 Points += 10;
                 im.NTail++;
                 im.AppleX = rnd.Next(1, im.width - 1);
@@ -123,29 +132,29 @@ namespace SnakeGame
             if (im.NoseX <= 0 || im.NoseX >= im.width - 1 ||
                 im.NoseY <= 0 || im.NoseY >= im.height - 1)
             {
-                gm.gameOver = true;
+                GameOver = true;
             }
 
             else
             {
-                gm.gameOver = false;
+                GameOver = false;
             }
 
             for (int i = 1; i < im.NTail; i++)
             {
-                if (TailX[i] == im.NoseX && TailY[i] == im.NoseY)
+                if (im.TailX[i] == im.NoseX && im.TailY[i] == im.NoseY)
                 {
                     if (horizontal || vertical)
                     {
-                        gm.gameOver = false;
+                        GameOver = true;
                     }
                     else
                     {
-                        gm.gameOver = true;
+                        GameOver = false;
                     }
                 }
 
-                if (TailX[i] == im.AppleX && TailY[i] == im.AppleY)
+                if (im.TailX[i] == im.AppleX && im.TailY[i] == im.AppleY)
                 {
                     im.AppleX = rnd.Next(1, im.width - 1);
                     im.AppleY = rnd.Next(1, im.height - 1);
@@ -154,16 +163,14 @@ namespace SnakeGame
         }
 
         public void Lose()
-        {            
+        {
             Console.WriteLine("You did an opsie :(\n");
             Console.Write("Press ESC to exit to menu\n");
             while (true)
             {
                 pressedKey = Console.ReadKey(true);
                 if (pressedKey.Key == ConsoleKey.Escape)
-                {
-                    im.ShowMenu();
-                }
+                    return;
             }
         }
     }
