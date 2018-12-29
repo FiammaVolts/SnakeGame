@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SnakeGame
 {
@@ -19,15 +15,23 @@ namespace SnakeGame
 
         public bool isPrinted { get; set; }
 
-        private int[] TailX = new int[100];
-        private int[] TailY = new int[100];
+        public int[] TailX = new int[100];
+        public int[] TailY = new int[100];
+
+        private GameManager gm;
 
         private readonly string snake = "\u20E2";
         private readonly string apple = "\u20D8";
 
+        public InterfaceManager(GameManager gm)
+        {
+            this.gm = gm;
+            ShowMenu();
+        }
+
         public void Update()
         {
-            ShowMenu();
+            ShowWorld();
         }
 
 
@@ -58,7 +62,7 @@ namespace SnakeGame
             Console.WriteLine("<- Press any button to go back to the menu\n");
             Console.ReadKey();
             Console.Clear();
-            ShowMenu();
+            gm.GameLoop();
         }
 
 
@@ -93,7 +97,7 @@ namespace SnakeGame
                         {
                             if (TailX[k] == j && TailY[k] == i)
                             {
-                                Console.Write("O");
+                                Console.Write("o");
                                 isPrinted = true;
                             }
                         }
@@ -107,7 +111,7 @@ namespace SnakeGame
             Console.WriteLine($"Your score: {Snake.Points}");
         }
 
-        public int ReadEntry()
+        public void ReadEntry()
         {
             // A loop that will run while the condition is true, and while the
             // player doesn't choose to leave
@@ -120,9 +124,7 @@ namespace SnakeGame
 
                     // If the player chooses 1
                     case "1":
-                        Console.Clear();
-                        ShowWorld();
-                        break;
+                        return;
 
                     // If the player chooses 2
                     case "2":
@@ -131,7 +133,7 @@ namespace SnakeGame
                         Console.WriteLine("<- Press any button to go back to the menu\n");
                         Console.ReadKey();
                         Console.Clear();
-                        ShowMenu();
+                        gm.GameLoop();
                         break;
 
                     // If the player chooses 3
@@ -156,8 +158,8 @@ namespace SnakeGame
                         Console.ReadLine();
                         // Will clear the console
                         Console.Clear();
-                        // Calls for the ShowMenu() method
-                        ShowMenu();
+                        // Calls for the GameLoop() method
+                        gm.GameLoop();
                         break;
                 }
             }
