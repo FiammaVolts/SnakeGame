@@ -3,8 +3,15 @@ using System.Text;
 
 namespace SnakeGame
 {
+    /// <summary>
+    /// Program class
+    /// </summary>
     class Program
     {
+        /// <summary>
+        /// Main method that will run the game
+        /// </summary>
+        /// <param name="args"></param>
         static void Main(string[] args)
         {
             // Uses the UTF8 on the console

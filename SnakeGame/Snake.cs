@@ -2,20 +2,31 @@
 
 namespace SnakeGame
 {
+    /// <summary>
+    /// A class for Snake
+    /// </summary>
     class Snake
     {
-        // Will create an instance of Random
+        /// <summary>
+        /// Creates an instance of Random
+        /// </summary>
         private Random rnd;
-        // Will create an instance of ConsoleKeyInfo
+        /// <summary>
+        /// Creates an instance of ConsoleKeyInfo
+        /// </summary>
         private ConsoleKeyInfo pressedKey;
-        // Will create an instance of InterfaceManager
+        /// <summary>
+        /// Creates an instance of InterfaceManager
+        /// </summary>
         private InterfaceManager im;
 
         // Variable for horizontal and vertical
         private bool horizontal;
         private bool vertical;
 
-        // Bool property for GameOver
+        /// <summary>
+        /// A bool property for GameOver
+        /// </summary>
         public bool GameOver { get; set; }
 
         // Strings for the direction the player chooses, needed
@@ -23,24 +34,33 @@ namespace SnakeGame
         public string dir;
         public string pre_dir;
 
-        // Property for the points
+        /// <summary>
+        /// Property for Points, set at 0
+        /// </summary>
         public int Points { get; set; } = 0;
 
-        // Constructor for the class
+        /// <summary>
+        /// The constructor of the class
+        /// </summary>
+        /// <param name="im"></param>
         public Snake(InterfaceManager im)
         {
             this.im = im;
             rnd = new Random();
         }
 
-        // Update() method that will call for CheckInput() and Movement()
+        /// <summary>
+        /// Update() method that will call for CheckInput() and Movement()
+        /// </summary>
         public void Update()
         {
             CheckInput();
             Movement();
         }
 
-        // Method that will check the player's input
+        /// <summary>
+        /// Method that will check the player's input
+        /// </summary>
         public void CheckInput()
         {
             // A while that will check which key was pressed
@@ -85,7 +105,9 @@ namespace SnakeGame
             }
         }
 
-        // A method for the movement
+        /// <summary>
+        /// A method for the movement
+        /// </summary>
         public void Movement()
         {
             int preX = im.TailX[0];
@@ -220,7 +242,9 @@ namespace SnakeGame
             }
         }
 
-        // A method that will be used when the player loses
+        /// <summary>
+        /// A method that will be used when the player loses
+        /// </summary>
         public void Lose()
         {
             Console.WriteLine("You did an opsie :(\n");
