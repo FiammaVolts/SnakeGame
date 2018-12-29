@@ -1,40 +1,51 @@
 ﻿using System;
 
+
 namespace SnakeGame
 {
     class InterfaceManager
-    {        
+    {
+        // Properties for the snake and apple
         public int NoseX { get; set; }
         public int NoseY { get; set; }
         public int NTail { get; set; }
         public int AppleX { get; set; }
         public int AppleY { get; set; }
 
+        // Will define the size of the world
         public readonly int height = 20;
         public readonly int width = 60;
 
+        // A bool property that will serve for the body
+        // of the snake
         public bool isPrinted { get; set; }
 
+        // An array of ints for the body of the snake
         public int[] TailX = new int[100];
         public int[] TailY = new int[100];
 
+        // An instance of GameManager
         private GameManager gm;
 
-        private readonly string _snake = "\u20E2";
-        private readonly string _apple = "\u20D8";
+        // Variables for the apple and snake's visualization
+        private readonly string _snake = "Q";
+        private readonly string _snakeTail = "o";
+        private readonly string _apple = "ó";
 
+        // Constructor of the class
         public InterfaceManager(GameManager gm)
         {
             this.gm = gm;
             ShowMenu();
         }
 
+        // Updade method that will call for the ShowWorld()
         public void Update()
         {
             ShowWorld();
         }
 
-
+        // Method that will render the menu to the player
         public void ShowMenu()
         {
             Console.WriteLine("╔═══*.·:·.**  < Snake >  **.·:·.*═══╗");
@@ -49,6 +60,7 @@ namespace SnakeGame
             ReadEntry();
         }
 
+        // Method that will render the credits to the player
         public void ShowCredits()
         {
             Console.WriteLine("╔═══*.·:·.**  < Credits >  **.·:·.*═══╗");
@@ -65,11 +77,12 @@ namespace SnakeGame
             gm.GameLoop();
         }
 
-
+        // Method that will render the world to the player
         public void ShowWorld()
         {
             Console.SetCursorPosition(0, 0);
 
+            // A for that will build the world
             for (int i = 0; i < height; i++)
             {
                 for (int j = 0; j < width; j++)
@@ -82,25 +95,35 @@ namespace SnakeGame
                     {
                         Console.Write("|");
                     }
+                    // Will place an apple
                     else if (j == AppleX && i == AppleY)
                     {
-                        Console.Write("a");
+                        Console.ForegroundColor = ConsoleColor.DarkRed;
+                        Console.Write(_apple);
+                        Console.ForegroundColor = ConsoleColor.White;
                     }
+                    // Will place the snake
                     else if (j == NoseX && i == NoseY)
                     {
-                        Console.Write("O");
+                        Console.ForegroundColor = ConsoleColor.DarkGreen;
+                        Console.Write(_snake);
+                        Console.ForegroundColor = ConsoleColor.White;
                     }
                     else
                     {
+                        // Will add to the snake's body
                         isPrinted = false;
+                        Console.ForegroundColor = ConsoleColor.Green;
                         for (int k = 0; k < NTail; k++)
                         {
                             if (TailX[k] == j && TailY[k] == i)
                             {
-                                Console.Write("o");
+                                Console.Write(_snakeTail);
                                 isPrinted = true;
                             }
                         }
+                        // Will place a blank spot
+                        Console.ForegroundColor = ConsoleColor.White;
                         if (!isPrinted)
                             Console.Write(" ");
                     }
@@ -108,9 +131,11 @@ namespace SnakeGame
                 }
                 Console.WriteLine();
             }
+            // Will show the points
             Console.WriteLine($"Your score: {gm.points}");
         }
 
+        // A method that will read the player's input
         public void ReadEntry()
         {
             // A loop that will run while the condition is true, and while the
@@ -142,6 +167,7 @@ namespace SnakeGame
                         ShowCredits();
                         break;
 
+                    // If the player chooses 4
                     case "4":
                         Console.Clear();
                         // Will break the loop and exit the program
