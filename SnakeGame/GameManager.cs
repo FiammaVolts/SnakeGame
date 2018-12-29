@@ -7,7 +7,9 @@ namespace SnakeGame
     {
         private InterfaceManager im;
         private Random rnd;
-        private Snake snake;       
+        private Snake snake;
+
+        public int points;
         
         public void Start()
         {            
@@ -17,7 +19,6 @@ namespace SnakeGame
 
             snake.dir = "RIGHT";
             snake.pre_dir = "";
-            Snake.Points = 0;
             im.NTail = 0;
             
             im.isPrinted = false;
@@ -35,6 +36,7 @@ namespace SnakeGame
             
             while(!snake.GameOver)
             {
+                points = snake.Points;
                 im.Update();
                 snake.Update();
                 Thread.Sleep(30);
