@@ -1,66 +1,47 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 
 namespace SnakeGame
 {
     class GameManager
     {
-        public World world;
+        private InterfaceManager im;
+        private Random rnd;
+        private Snake snake;       
+        
+        public void Start()
+        {            
+            im = new InterfaceManager(this);
+            snake = new Snake(im);
+            rnd = new Random();
 
-        public bool gameOver;
-        public bool reset;
+            snake.dir = "RIGHT";
+            snake.pre_dir = "";
+            Snake.Points = 0;
+            im.NTail = 0;
+            
+            im.isPrinted = false;
 
-        private readonly string snake = "\u20E2";
-        private readonly string apple = "\u20D8";
-
-        public void Update()
-        {
-
+            im.NoseX = im.width / 2;
+            im.NoseY = im.height / 2;
+            im.AppleX = rnd.Next(1, im.width - 1);
+            im.AppleY = rnd.Next(1, im.height - 1);
         }
 
-        public void ShowWorld()
+        public void GameLoop()
         {
-            for (int i = 0; i < World.height; i++)
+            Start();
+            Console.CursorVisible = false;
+            
+            while(!snake.GameOver)
             {
-                for (int j = 0; j < World.width; j++)
-                {
-                    if (i == 0 || i == World.height - 1)
-                    {
-                        Console.Write("|");
-                    }
-                    else if (j == 0 || j == World.width - 1)
-                    {
-                        Console.Write("_ ");
-                    }
-                    else if (j == world.appleX && i == world.appleY)
-                    {
-                        Console.Write(apple);
-                    }
-                    else if (j == world.noseX && i == world.noseY)
-                    {
-                        Console.Write(snake);
-                    }
-                    else
-                    {
-                        world.isPrinted = false;
-                        for (int k = 0; k < world.nTail; k++)
-                        {
-                            if (world.TailX[k] == j && world.TailY[k] == i)
-                            {
-                                Console.Write(snake);
-                                world.isPrinted = true;
-                            }
-                        }
-                        if (!world.isPrinted)
-                            Console.Write(" ");
-                    }
-
-                }
-                Console.WriteLine();
+                im.Update();
+                snake.Update();
+                Thread.Sleep(30);
             }
+            snake.Lose();
+            Console.Clear();
+            GameLoop();
         }
     }
 }
