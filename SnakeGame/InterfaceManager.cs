@@ -57,7 +57,7 @@ namespace SnakeGame
         /// Constructor of the class
         /// </summary>
         /// <param name="gm"></param>
-        public InterfaceManager(GameManager gm)
+        public InterfaceManager(GameManager gm, HighScores hs)
         {
             this.hs = hs;
             this.gm = gm;
