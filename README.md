@@ -71,7 +71,7 @@ on our highscore using _Files_ and _StreamReader/Writer_.
 ### Fluxogram
 
 <p align="center">
-  <img src="https://i.imgur.com/lHH7wqG.png" alt="Fluxogram"/>
+  <img src="https://i.imgur.com/VsLgCJI.png" alt="Fluxogram"/>
 </p>
 
 ## Conclusions
