@@ -66,12 +66,12 @@ on our highscore using _Files_ and _StreamReader/Writer_.
 
 ### UML Diagram
 
-![UML Diagram](link)
+![UML Diagram](https://i.imgur.com/rTUAtTS.png)
 
 ### Fluxogram
 
 <p align="center">
-  <img src="link" alt="Fluxogram"/>
+  <img src="https://i.imgur.com/lHH7wqG.png" alt="Fluxogram"/>
 </p>
 
 ## Conclusions
