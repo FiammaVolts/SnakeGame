@@ -45,11 +45,13 @@ namespace SnakeGame
         /// Instance of GameManager
         /// </summary>
         private GameManager gm;
+        private HighScores hs;
 
         // Variables for the apple and snake's visualization
         private readonly string _snake = "Q";
         private readonly string _snakeTail = "o";
         private readonly string _apple = "ó";
+
 
         /// <summary>
         /// Constructor of the class
@@ -57,6 +59,7 @@ namespace SnakeGame
         /// <param name="gm"></param>
         public InterfaceManager(GameManager gm)
         {
+            this.hs = hs;
             this.gm = gm;
             ShowMenu();
         }
@@ -186,7 +189,7 @@ namespace SnakeGame
                     // If the player chooses 2
                     case "2":
                         Console.Clear();
-                        Console.WriteLine("There are no highscores yet :<\n");
+                        hs.ReadScores();
                         Console.WriteLine("<- Press any button to go back to the menu\n");
                         Console.ReadKey();
                         Console.Clear();

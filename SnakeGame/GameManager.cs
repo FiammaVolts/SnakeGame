@@ -21,21 +21,25 @@ namespace SnakeGame
         /// </summary>
         private Snake snake;
 
+        private HighScores hs;
+
         public int points;
+
 
         /// <summary>
         /// Start() method that will start all our instances
         /// </summary>
         public void Start()
-        {            
-            im = new InterfaceManager(this);
+        {
+            hs = new HighScores();
+            im = new InterfaceManager(this, hs);
             snake = new Snake(im);
             rnd = new Random();
 
             snake.dir = "RIGHT";
             snake.pre_dir = "";
             im.NTail = 0;
-            
+
             im.isPrinted = false;
 
             im.NoseX = im.width / 2;
@@ -51,9 +55,9 @@ namespace SnakeGame
         {
             Start();
             Console.CursorVisible = false;
-            
+
             // Will run as long as GameOver is not true
-            while(!snake.GameOver)
+            while (!snake.GameOver)
             {
                 points = snake.Points;
                 im.Update();
@@ -62,6 +66,7 @@ namespace SnakeGame
             }
             // Will call the Lose() method
             snake.Lose();
+            hs.InputScore(points);
             Console.Clear();
             GameLoop();
         }
