@@ -193,6 +193,7 @@ namespace SnakeGame
 
                     // If the player chooses 1
                     case "1":
+                        Console.Clear();
                         return;
 
                     // If the player chooses 2
