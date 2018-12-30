@@ -84,6 +84,15 @@ namespace SnakeGame
                               "       3. Credits\n" +
                               "       4. Quit Game\n");
             Console.WriteLine("╚═══*.·:·.**  < Game >  **.·:·.*═══╝");
+            Console.WriteLine();
+            Console.WriteLine("How to play:\n" +
+                              " * Collect apples to gain points and to keep the" +
+                              " doctor away;\n" +
+                              " * You'll lose if you hit a wall or your own tail;\n" +
+                              " * Don't die.");
+            Console.WriteLine();
+            Console.WriteLine("Controls:\n" +
+                              " * WASD to move snake.\n");
 
             // Will call the ReadEntry() method
             ReadEntry();
