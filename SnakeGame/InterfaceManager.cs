@@ -3,13 +3,30 @@
 
 namespace SnakeGame
 {
+    /// <summary>
+    /// Class for InterfaceManager
+    /// </summary>
     class InterfaceManager
     {
-        // Properties for the snake and apple
+        /// <summary>
+        /// Property for the snake's nose in the X position
+        /// </summary>
         public int NoseX { get; set; }
+        /// <summary>
+        /// Property for the snake's nose in the Y position
+        /// </summary>
         public int NoseY { get; set; }
+        /// <summary>
+        /// Propety for the snake's tail
+        /// </summary>
         public int NTail { get; set; }
+        /// <summary>
+        /// Property for the apple in the X position
+        /// </summary>
         public int AppleX { get; set; }
+        /// <summary>
+        /// Property for the apple in the Y position
+        /// </summary>
         public int AppleY { get; set; }
 
         // Will define the size of the world
@@ -24,7 +41,9 @@ namespace SnakeGame
         public int[] TailX = new int[100];
         public int[] TailY = new int[100];
 
-        // An instance of GameManager
+        /// <summary>
+        /// Instance of GameManager
+        /// </summary>
         private GameManager gm;
         private HighScores hs;
 
@@ -33,21 +52,29 @@ namespace SnakeGame
         private readonly string _snakeTail = "o";
         private readonly string _apple = "ó";
 
-        // Constructor of the class
-        public InterfaceManager(GameManager gm, HighScores hs)
+
+        /// <summary>
+        /// Constructor of the class
+        /// </summary>
+        /// <param name="gm"></param>
+        public InterfaceManager(GameManager gm)
         {
             this.hs = hs;
             this.gm = gm;
             ShowMenu();
         }
 
-        // Updade method that will call for the ShowWorld()
+        /// <summary>
+        /// Updade method that will call for the ShowWorld()
+        /// </summary>
         public void Update()
         {
             ShowWorld();
         }
 
-        // Method that will render the menu to the player
+        /// <summary>
+        /// Method that will render the menu to the player
+        /// </summary>
         public void ShowMenu()
         {
             Console.WriteLine("╔═══*.·:·.**  < Snake >  **.·:·.*═══╗");
@@ -62,7 +89,9 @@ namespace SnakeGame
             ReadEntry();
         }
 
-        // Method that will render the credits to the player
+        /// <summary>
+        /// Method that will render the credits to the player
+        /// </summary>
         public void ShowCredits()
         {
             Console.WriteLine("╔═══*.·:·.**  < Credits >  **.·:·.*═══╗");
@@ -79,7 +108,9 @@ namespace SnakeGame
             gm.GameLoop();
         }
 
-        // Method that will render the world to the player
+        /// <summary>
+        /// Method that will render the world to the player
+        /// </summary>
         public void ShowWorld()
         {
             Console.SetCursorPosition(0, 0);
@@ -137,7 +168,9 @@ namespace SnakeGame
             Console.WriteLine($"Your score: {gm.points}");
         }
 
-        // A method that will read the player's input
+        /// <summary>
+        /// A method that will read the player's input
+        /// </summary>
         public void ReadEntry()
         {
             // A loop that will run while the condition is true, and while the

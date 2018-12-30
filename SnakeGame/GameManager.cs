@@ -3,20 +3,32 @@ using System.Threading;
 
 namespace SnakeGame
 {
+    /// <summary>
+    /// A class for GameManager
+    /// </summary>
     class GameManager
     {
-        // Instance of InterfaceManager
+        /// <summary>
+        /// Instance of InterfaceManager
+        /// </summary>
         private InterfaceManager im;
-        // Instance of Random
+        /// <summary>
+        /// Instance of Random
+        /// </summary>
         private Random rnd;
-        // Instance of Snake
+        /// <summary>
+        /// Instance of Snake
+        /// </summary>
         private Snake snake;
 
         private HighScores hs;
 
         public int points;
 
-        // Start() method that will start all our variables
+
+        /// <summary>
+        /// Start() method that will start all our instances
+        /// </summary>
         public void Start()
         {
             hs = new HighScores();
@@ -36,7 +48,9 @@ namespace SnakeGame
             im.AppleY = rnd.Next(1, im.height - 1);
         }
 
-        // GameLoop() method that will manage our game
+        /// <summary>
+        /// GameLoop() method that will manage our game
+        /// </summary>
         public void GameLoop()
         {
             Start();
